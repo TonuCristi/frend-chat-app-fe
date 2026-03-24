@@ -1,6 +1,6 @@
 import "./App.css";
-import Header from "./components/common/Header";
 
+import Header from "./components/common/header/Header";
 import Sidebar from "./components/common/Sidebar";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <Header />
       <div className="grid h-full grid-cols-[20fr_80fr]">
         <Sidebar />
-        <main className="h-full border-l-2 border-amber-400 p-8">main</main>
+        <main className="border-primary h-full border-l-2 p-8">main</main>
       </div>
     </div>
   );
