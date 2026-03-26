@@ -6,7 +6,7 @@ const button = cva(
   {
     variants: {
       variant: {
-        empty: "",
+        default: "",
         primary:
           "py-2 px-4 bg-primary hover:bg-primary-hover border-2 border-primary hover:border-primary-hover rounded-md",
         secondary:
@@ -18,7 +18,7 @@ const button = cva(
       },
     },
     defaultVariants: {
-      variant: "empty",
+      variant: "default",
       size: "auto",
     },
   },
