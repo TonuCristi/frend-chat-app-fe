@@ -16,7 +16,7 @@ export default function Header() {
           name="burgerMenu"
           className="text-primary relative z-10 text-xl"
         />
-        <div className="absolute top-1/2 left-1/2 h-0 w-0 -translate-1/2 rounded-full bg-zinc-800 transition-all group-hover:h-10 group-hover:w-10"></div>
+        <div className="absolute top-1/2 left-1/2 h-0 w-0 -translate-1/2 rounded-full bg-zinc-800 transition-all group-hover:h-10 group-hover:w-10 group-active:h-10 group-active:w-10"></div>
       </div>
 
       <div className="ml-auto">

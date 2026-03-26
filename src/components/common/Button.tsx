@@ -8,9 +8,9 @@ const button = cva(
       variant: {
         default: "",
         primary:
-          "py-2 px-4 bg-primary hover:bg-primary-hover border-2 border-primary hover:border-primary-hover rounded-md",
+          "py-2 px-4 bg-primary active:bg-primary-hover hover:bg-primary-hover border-2 border-primary active:border-primary-hover hover:border-primary-hover rounded-md",
         secondary:
-          "py-2 px-4 border-2 border-primary hover:border-primary-hover hover:bg-zinc-800 rounded-md",
+          "py-2 px-4 border-2 border-primary active:border-primary-hover active:bg-zinc-800 hover:border-primary-hover hover:bg-zinc-800 rounded-md",
       },
       size: {
         full: "w-full",

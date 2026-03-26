@@ -25,10 +25,10 @@ export default function UserDropdown() {
 
       {isOpen && (
         <div className="absolute top-full right-0 mt-2 flex w-40 flex-col rounded-md bg-zinc-800 p-2 sm:w-full">
-          <Button className="hover:bg-app rounded-md p-2 transition-all">
+          <Button className="active:bg-app hover:bg-app rounded-md p-2 transition-all">
             Profile
           </Button>
-          <Button className="hover:bg-app rounded-md p-2 transition-all">
+          <Button className="active:bg-app hover:bg-app rounded-md p-2 transition-all">
             Log out
           </Button>
         </div>
