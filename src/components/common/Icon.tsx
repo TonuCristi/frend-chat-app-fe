@@ -1,8 +1,13 @@
 import type { ReactNode } from "react";
 
-import { LuAlignJustify, LuChevronDown, LuChevronUp } from "react-icons/lu";
+import {
+  LuAlignJustify,
+  LuChevronDown,
+  LuChevronUp,
+  LuSearch,
+} from "react-icons/lu";
 
-type IconName = "chevronDown" | "chevronUp" | "burgerMenu";
+type IconName = "chevronDown" | "chevronUp" | "burgerMenu" | "search";
 
 type Props = {
   name: IconName;
@@ -14,6 +19,7 @@ export default function Icon({ name, className = "" }: Props) {
     chevronDown: <LuChevronDown />,
     chevronUp: <LuChevronUp />,
     burgerMenu: <LuAlignJustify />,
+    search: <LuSearch />,
   };
 
   return <span className={className}>{icon[name]}</span>;

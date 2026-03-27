@@ -1,6 +1,8 @@
 import type { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
+import { cn } from "../../utils/cn";
+
 const button = cva(
   ["cursor-pointer transition-all disabled:cursor-not-allowed"],
   {
@@ -12,14 +14,14 @@ const button = cva(
         secondary:
           "py-2 px-4 border-2 border-primary active:border-primary-hover active:bg-zinc-800 hover:border-primary-hover hover:bg-zinc-800 rounded-md",
       },
-      size: {
+      width: {
         full: "w-full",
         auto: "w-auto",
       },
     },
     defaultVariants: {
       variant: "default",
-      size: "auto",
+      width: "auto",
     },
   },
 );
@@ -34,11 +36,11 @@ export default function Button({
   children,
   className,
   variant,
-  size,
+  width,
   ...props
 }: Props) {
   return (
-    <button {...props} className={button({ variant, size, className })}>
+    <button {...props} className={cn(button({ variant, width, className }))}>
       {children}
     </button>
   );
