@@ -1,0 +1,34 @@
+import { useState } from "react";
+
+import Button from "../../../common/Button";
+import Icon from "../../../common/Icon";
+
+import { useClickOutside } from "../../../../hooks/useClickOutside";
+
+export default function ChatListItemDropdown() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const containerRef = useClickOutside(() => setIsOpen(false));
+
+  return (
+    <div ref={containerRef} className="relative">
+      <Button
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="group relative flex cursor-pointer items-center justify-center"
+      >
+        <Icon
+          name="verticalDots"
+          className="text-primary relative z-10 text-xl"
+        />
+        <div className="absolute top-1/2 left-1/2 flex h-7 w-7 -translate-1/2 items-center justify-center overflow-hidden rounded-full">
+          <div className="bg-app h-0 w-0 transition-all group-hover:h-full group-hover:w-full group-active:h-full group-active:w-full"></div>
+        </div>
+      </Button>
+
+      {isOpen && (
+        <div className="shadow-primary/50 absolute top-full right-0 mt-2 flex w-40 flex-col rounded-md bg-zinc-900 p-2 shadow-md">
+          asdasdasd
+        </div>
+      )}
+    </div>
+  );
+}

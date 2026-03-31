@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Icon from "../Icon";
 import Button from "../Button";
+import { Link } from "react-router";
 
 import { useClickOutside } from "../../../hooks/useClickOutside";
 
@@ -12,10 +13,10 @@ export default function UserDropdown() {
   return (
     <div ref={containerRef} className="relative">
       <Button
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => setIsOpen(true)}
         className="flex cursor-pointer items-center gap-4 rounded-md bg-zinc-800 px-2 py-1"
       >
-        <span className="hidden font-semibold sm:block">John Snow</span>
+        <span className="hidden sm:block">John Snow</span>
         <span className="bg-primary h-8 w-8 rounded-full"></span>
         <Icon
           name={isOpen ? "chevronUp" : "chevronDown"}
@@ -25,9 +26,12 @@ export default function UserDropdown() {
 
       {isOpen && (
         <div className="absolute top-full right-0 mt-2 flex w-40 flex-col rounded-md bg-zinc-800 p-2 sm:w-full">
-          <Button className="active:bg-app hover:bg-app rounded-md p-2 transition-all">
+          <Link
+            to="/profile"
+            className="active:bg-app hover:bg-app rounded-md p-2 text-center transition-all"
+          >
             Profile
-          </Button>
+          </Link>
           <Button className="active:bg-app hover:bg-app rounded-md p-2 transition-all">
             Log out
           </Button>

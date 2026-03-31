@@ -1,15 +1,17 @@
+import ChatsList from "../features/chats/components/ChatsList";
 import Icon from "./Icon";
 import Input from "./Input";
 
 export default function Sidebar() {
   return (
-    <aside className="h-full p-4 sm:p-8">
+    <aside className="flex h-full flex-col gap-4 p-4">
       <Input
         variant="primary"
         width="full"
         placeholder="Search your contact..."
         rightIcon={<Icon name="search" className="text-primary stroke-3" />}
       />
+      <ChatsList />
     </aside>
   );
 }

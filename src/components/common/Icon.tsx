@@ -4,10 +4,16 @@ import {
   LuAlignJustify,
   LuChevronDown,
   LuChevronUp,
+  LuEllipsisVertical,
   LuSearch,
 } from "react-icons/lu";
 
-type IconName = "chevronDown" | "chevronUp" | "burgerMenu" | "search";
+type IconName =
+  | "chevronDown"
+  | "chevronUp"
+  | "burgerMenu"
+  | "search"
+  | "verticalDots";
 
 type Props = {
   name: IconName;
@@ -20,6 +26,7 @@ export default function Icon({ name, className = "" }: Props) {
     chevronUp: <LuChevronUp />,
     burgerMenu: <LuAlignJustify />,
     search: <LuSearch />,
+    verticalDots: <LuEllipsisVertical />,
   };
 
   return <span className={className}>{icon[name]}</span>;
