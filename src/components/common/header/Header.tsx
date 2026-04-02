@@ -1,4 +1,4 @@
-import Icon from "../Icon";
+import BurgerMenu from "./BurgerMenu";
 import UserDropdown from "./UserDropdown";
 import { Link } from "react-router";
 
@@ -12,15 +12,7 @@ export default function Header() {
         </span>
       </Link>
 
-      <div className="group relative cursor-pointer">
-        <Icon
-          name="burgerMenu"
-          className="text-primary relative z-10 text-xl"
-        />
-        <div className="absolute top-1/2 left-1/2 flex h-10 w-10 -translate-1/2 items-center justify-center overflow-hidden rounded-full">
-          <div className="h-0 w-0 bg-zinc-800 transition-all group-hover:h-full group-hover:w-full group-active:h-full group-active:w-full"></div>
-        </div>
-      </div>
+      <BurgerMenu />
 
       <div className="ml-auto">
         <UserDropdown />

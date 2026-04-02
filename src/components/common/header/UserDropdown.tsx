@@ -13,7 +13,7 @@ export default function UserDropdown() {
   return (
     <div ref={containerRef} className="relative">
       <Button
-        onClick={() => setIsOpen(true)}
+        onClick={() => setIsOpen((prev) => !prev)}
         className="flex cursor-pointer items-center gap-4 rounded-md bg-zinc-800 px-2 py-1"
       >
         <span className="hidden sm:block">John Snow</span>
