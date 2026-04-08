@@ -6,6 +6,7 @@ export default function Sidebar() {
   return (
     <aside className="flex h-full flex-col gap-4">
       <Input
+        name="search"
         variant="primary"
         width="full"
         placeholder="Search your contact..."
