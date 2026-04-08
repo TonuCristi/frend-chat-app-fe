@@ -1,12 +1,9 @@
-import RootLayout from "./components/common/RootLayout";
-import AuthLayout from "./components/common/AuthLayout";
+import { Outlet } from "react-router";
 
 function App() {
-  const isLogged = false;
-
   return (
     <div className="h-dvh overflow-hidden">
-      {isLogged ? <RootLayout /> : <AuthLayout />}
+      <Outlet />
     </div>
   );
 }
