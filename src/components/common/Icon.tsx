@@ -5,6 +5,8 @@ import {
   LuChevronDown,
   LuChevronUp,
   LuEllipsisVertical,
+  LuEye,
+  LuEyeOff,
   LuSearch,
   LuX,
 } from "react-icons/lu";
@@ -15,7 +17,9 @@ type IconName =
   | "burgerMenu"
   | "search"
   | "verticalDots"
-  | "xmark";
+  | "xmark"
+  | "eye"
+  | "eyeClosed";
 
 type Props = {
   name: IconName;
@@ -30,6 +34,8 @@ export default function Icon({ name, className = "" }: Props) {
     search: <LuSearch />,
     verticalDots: <LuEllipsisVertical />,
     xmark: <LuX />,
+    eye: <LuEye />,
+    eyeClosed: <LuEyeOff />,
   };
 
   return <span className={className}>{icon[name]}</span>;

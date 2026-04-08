@@ -4,12 +4,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import Button from "./Button";
 
 import { cn } from "../../utils/cn";
+import { useFormContext } from "react-hook-form";
 
 const inputContainer = cva([""], {
   variants: {
     variant: {
       default: "",
-      primary: "flex items-center gap-2 border-2 border-primary rounded-md p-2",
+      primary:
+        "flex items-center justify-between gap-2 border-2 border-primary rounded-md p-2",
     },
     width: {
       full: "w-full",
@@ -30,12 +32,12 @@ const input = cva([""], {
     },
     width: {
       full: "w-full",
-      auto: "w-auto",
+      auto: "w-full",
     },
   },
   defaultVariants: {
     variant: "default",
-    width: "auto",
+    width: "full",
   },
 });
 
@@ -44,6 +46,7 @@ type Props = DetailedHTMLProps<
   HTMLInputElement
 > &
   VariantProps<typeof input> & {
+    name: string;
     leftIcon?: ReactNode;
     rightIcon?: ReactNode;
     onLeftIconClick?: () => void;
@@ -52,6 +55,7 @@ type Props = DetailedHTMLProps<
 
 export default function Input({
   className,
+  name,
   variant,
   width,
   leftIcon,
@@ -60,6 +64,8 @@ export default function Input({
   onRightIconClick,
   ...props
 }: Props) {
+  const { register } = useFormContext();
+
   function handleLeftIconClick() {
     if (onLeftIconClick) {
       onLeftIconClick();
@@ -76,9 +82,10 @@ export default function Input({
     <div className={cn(inputContainer({ variant, width, className }))}>
       {leftIcon && (
         <Button
+          type="button"
           className={cn(
             "flex items-center justify-center",
-            onLeftIconClick && "cursor-default",
+            onLeftIconClick && "cursor-pointer",
           )}
           onClick={handleLeftIconClick}
         >
@@ -86,13 +93,18 @@ export default function Input({
         </Button>
       )}
 
-      <input {...props} className={cn(input({ variant, width, className }))} />
+      <input
+        {...props}
+        {...register(name)}
+        className={cn(input({ variant, width, className }))}
+      />
 
       {rightIcon && (
         <Button
+          type="button"
           className={cn(
             "flex items-center justify-center",
-            onRightIconClick && "cursor-default",
+            onRightIconClick && "cursor-pointer",
           )}
           onClick={handleRightIconClick}
         >
