@@ -9,7 +9,10 @@ type Props = DetailedHTMLProps<
 
 export default function Label({ children, className, ...props }: Props) {
   return (
-    <label {...props} className={cn("text-sm font-semibold", className)}>
+    <label
+      {...props}
+      className={cn("inline-block text-sm font-semibold", className)}
+    >
       {children}
     </label>
   );

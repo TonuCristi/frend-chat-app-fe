@@ -10,7 +10,7 @@ export default function AuthLayout() {
             Frend
           </span>
         </div>
-        <p className="font-semibold">Say hi to your friends!</p>
+        <p className="text-zinc-400">Say hi to your friends!</p>
       </div>
 
       <div className="border-primary flex items-center justify-center rounded-md border-2 p-4">

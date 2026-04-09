@@ -96,7 +96,7 @@ export default function Input({
       <input
         {...props}
         {...register(name)}
-        className={cn(input({ variant, width, className }))}
+        className={cn(input({ variant, width }))}
       />
 
       {rightIcon && (

@@ -5,5 +5,5 @@ type Props = {
 };
 
 export default function InputContainer({ children }: Props) {
-  return <div className="flex flex-col gap-0.5">{children}</div>;
+  return <div className="flex flex-col gap-1">{children}</div>;
 }
