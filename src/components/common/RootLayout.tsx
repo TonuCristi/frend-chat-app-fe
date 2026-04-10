@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 
 export default function RootLayout() {
   return (
-    <div>
+    <div className="w-full">
       <Header />
       <main className="h-full">
         <Outlet />
