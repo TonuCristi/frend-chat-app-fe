@@ -31,7 +31,7 @@ export default function ChatListItemDropdown() {
       </Button>
 
       {isOpen && (
-        <div className="shadow-primary/50 absolute top-full right-0 mt-2 flex w-40 flex-col rounded-md bg-zinc-900 p-2 shadow-md">
+        <div className="border-primary absolute top-full right-0 mt-2 flex w-40 flex-col rounded-md border-2 bg-zinc-900 p-2">
           asdasdasd
         </div>
       )}
