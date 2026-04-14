@@ -31,8 +31,23 @@ export default function ChatListItemDropdown() {
       </Button>
 
       {isOpen && (
-        <div className="border-primary absolute top-full right-0 mt-2 flex w-40 flex-col rounded-md border-2 bg-zinc-900 p-2">
-          asdasdasd
+        <div className="border-primary absolute top-full right-0 z-20 mt-2 flex min-w-40 flex-col rounded-md border-2 bg-zinc-800 p-2">
+          <Button className="active:bg-app hover:bg-app flex items-center gap-2 rounded-md p-2 text-left text-nowrap transition-all">
+            <Icon name="heart" />
+            <span>Add to favorites</span>
+          </Button>
+          <Button className="active:bg-app hover:bg-app flex items-center gap-2 rounded-md p-2 text-left text-nowrap transition-all">
+            <Icon name="block" />
+            <span>Block</span>
+          </Button>
+          <Button className="active:bg-app hover:bg-app flex items-center gap-2 rounded-md p-2 text-left text-nowrap transition-all">
+            <Icon name="circleMinus" />
+            <span>Clear chat</span>
+          </Button>
+          <Button className="active:bg-app hover:bg-app flex items-center gap-2 rounded-md p-2 text-left text-nowrap transition-all">
+            <Icon name="trash" />
+            <span>Delete chat</span>
+          </Button>
         </div>
       )}
     </div>

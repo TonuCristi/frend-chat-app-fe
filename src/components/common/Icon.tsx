@@ -4,10 +4,14 @@ import {
   LuAlignJustify,
   LuChevronDown,
   LuChevronUp,
+  LuCircleMinus,
+  LuCircleOff,
   LuEllipsisVertical,
   LuEye,
   LuEyeOff,
+  LuHeart,
   LuSearch,
+  LuTrash2,
   LuX,
 } from "react-icons/lu";
 
@@ -19,7 +23,11 @@ type IconName =
   | "verticalDots"
   | "xmark"
   | "eye"
-  | "eyeClosed";
+  | "eyeClosed"
+  | "heart"
+  | "trash"
+  | "circleMinus"
+  | "block";
 
 type Props = {
   name: IconName;
@@ -36,6 +44,10 @@ export default function Icon({ name, className = "" }: Props) {
     xmark: <LuX />,
     eye: <LuEye />,
     eyeClosed: <LuEyeOff />,
+    heart: <LuHeart />,
+    trash: <LuTrash2 />,
+    circleMinus: <LuCircleMinus />,
+    block: <LuCircleOff />,
   };
 
   return <span className={className}>{icon[name]}</span>;
