@@ -36,7 +36,9 @@ export default function ChatListItemDropdown() {
 
       {isOpen && (
         <div className="border-primary absolute top-full right-0 z-20 mt-2 flex min-w-40 flex-col rounded-md border-2 bg-zinc-800 p-2">
-          <AddToFavoritesButton />
+          <div className="border-primary mb-2 border-b pb-2">
+            <AddToFavoritesButton />
+          </div>
           <BlockChatButton />
           <ClearChatButton />
           <DeleteChatButton />

@@ -14,11 +14,11 @@ export default function BlockChatButton() {
         className="active:bg-app hover:bg-app flex items-center gap-2 rounded-md p-2 text-left text-nowrap transition-all"
       >
         <Icon name="block" />
-        <span>Block</span>
+        <span>Block chat</span>
       </Button>
       {isOpen && (
         <ConfirmationModal
-          description="This will stop all incoming messages from this chat. You can reverse this action later."
+          description="This will stop all incoming messages from this conversation. You can reverse this action later."
           onAproveClick={() => console.log("Click!")}
           onRejectClick={() => setIsOpen(false)}
         >
