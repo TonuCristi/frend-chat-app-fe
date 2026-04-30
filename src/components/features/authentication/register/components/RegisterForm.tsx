@@ -8,9 +8,11 @@ import Button from "../../../../common/Button";
 import Message from "../../../../common/Message";
 import InputContainer from "../../../../common/InputContainer";
 import { Link } from "react-router";
+import { useMutation } from "@tanstack/react-query";
 
 import { registerSchema } from "../../../../../schemas/register.schema";
 import type { Register } from "../../../../../types/user.type";
+import { authApi } from "../../../../../api/authApi";
 
 const inputs = [
   {
@@ -39,13 +41,20 @@ export default function RegisterForm() {
     resolver: zodResolver(registerSchema),
   });
 
+  const mutation = useMutation({
+    mutationFn: (newUser: Register) => {
+      return authApi.register(newUser);
+    },
+  });
+
   const {
     handleSubmit,
     formState: { errors },
   } = methods;
 
   const onSubmit: SubmitHandler<Register> = (data) => {
-    console.log(data);
+    mutation.mutate(data);
+    // console.log(data);
   };
 
   return (
