@@ -7,18 +7,31 @@ import TogglePasswordInput from "../../../../common/TogglePasswordInput";
 import Button from "../../../../common/Button";
 import Message from "../../../../common/Message";
 import InputContainer from "../../../../common/InputContainer";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { loginSchema } from "../../../../../schemas/login.schema";
 import type { Login } from "../../../../../types/user.type";
+import { useMutation } from "@tanstack/react-query";
+import { authApi } from "../../../../../api/authApi";
 
 export default function LoginForm() {
   const methods = useForm<Login>({
     defaultValues: {
-      email: "",
-      password: "",
+      email: "john@mail.com",
+      password: "John2002@",
     },
     resolver: zodResolver(loginSchema),
+  });
+
+  const navigate = useNavigate();
+
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: (user: Login) => {
+      return authApi.login(user);
+    },
+    onSuccess: () => {
+      navigate("/");
+    },
   });
 
   const {
@@ -26,9 +39,7 @@ export default function LoginForm() {
     formState: { errors },
   } = methods;
 
-  const onSubmit: SubmitHandler<Login> = (data) => {
-    console.log(data);
-  };
+  const onSubmit: SubmitHandler<Login> = (data) => mutate(data);
 
   return (
     <FormProvider {...methods}>
@@ -43,11 +54,12 @@ export default function LoginForm() {
               placeholder="Enter your email..."
             />
             {errors.email && (
-              <Message type="error" className="mt-1">
+              <Message variant="error" className="mt-1">
                 {errors.email.message}
               </Message>
             )}
           </InputContainer>
+
           <InputContainer>
             <Label htmlFor="password">Password</Label>
             <TogglePasswordInput
@@ -56,7 +68,7 @@ export default function LoginForm() {
               placeholder="Enter your password..."
             />
             {errors.password && (
-              <Message type="error" className="mt-1">
+              <Message variant="error" className="mt-1">
                 {errors.password.message}
               </Message>
             )}
@@ -67,9 +79,20 @@ export default function LoginForm() {
           Forgot password?
         </Link>
 
-        <Button variant="primary" type="submit" className="mb-2">
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={isPending}
+          className="mb-2"
+        >
           Login
         </Button>
+
+        {error && (
+          <Message variant="error" className="mb-2">
+            {error.message}
+          </Message>
+        )}
 
         <Link to="/register" className="mb-4 text-center text-zinc-400">
           Don't have an account?{" "}

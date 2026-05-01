@@ -7,43 +7,31 @@ import TogglePasswordInput from "../../../../common/TogglePasswordInput";
 import Button from "../../../../common/Button";
 import Message from "../../../../common/Message";
 import InputContainer from "../../../../common/InputContainer";
-import { Link } from "react-router";
-import { useMutation } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router";
 
 import { registerSchema } from "../../../../../schemas/register.schema";
 import type { Register } from "../../../../../types/user.type";
 import { authApi } from "../../../../../api/authApi";
-
-const inputs = [
-  {
-    id: "username",
-    name: "username",
-    type: "text",
-    placeholder: "Enter your username...",
-    label: "Username",
-  },
-  {
-    id: "email",
-    name: "email",
-    type: "text",
-    placeholder: "Enter your email...",
-    label: "Email",
-  },
-] as const;
+import { useMutation } from "@tanstack/react-query";
 
 export default function RegisterForm() {
   const methods = useForm<Register>({
     defaultValues: {
-      username: "",
-      email: "",
-      password: "",
+      username: "john",
+      email: "john@mail.com",
+      password: "John@2002",
     },
     resolver: zodResolver(registerSchema),
   });
 
-  const mutation = useMutation({
+  const navigate = useNavigate();
+
+  const { mutate, isPending, error } = useMutation({
     mutationFn: (newUser: Register) => {
       return authApi.register(newUser);
+    },
+    onSuccess: () => {
+      navigate("/");
     },
   });
 
@@ -52,32 +40,41 @@ export default function RegisterForm() {
     formState: { errors },
   } = methods;
 
-  const onSubmit: SubmitHandler<Register> = (data) => {
-    mutation.mutate(data);
-    // console.log(data);
-  };
+  const onSubmit: SubmitHandler<Register> = async (data) => mutate(data);
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         <div className="mb-8 flex flex-col gap-4">
-          {inputs.map(({ id, name, type, placeholder, label }) => (
-            <InputContainer key={id}>
-              <Label htmlFor={id}>{label}</Label>
-              <Input
-                variant="primary"
-                id={id}
-                name={name}
-                type={type}
-                placeholder={placeholder}
-              />
-              {errors[name] && (
-                <Message type="error" className="mt-1">
-                  {errors[name].message}
-                </Message>
-              )}
-            </InputContainer>
-          ))}
+          <InputContainer>
+            <Label htmlFor="username">Username</Label>
+            <Input
+              variant="primary"
+              id="username"
+              name="username"
+              placeholder="Enter your username..."
+            />
+            {errors.username && (
+              <Message variant="error" className="mt-1">
+                {errors.username.message}
+              </Message>
+            )}
+          </InputContainer>
+
+          <InputContainer>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              variant="primary"
+              id="email"
+              name="email"
+              placeholder="Enter your email..."
+            />
+            {errors.email && (
+              <Message variant="error" className="mt-1">
+                {errors.email.message}
+              </Message>
+            )}
+          </InputContainer>
 
           <InputContainer>
             <Label htmlFor="password">Password</Label>
@@ -87,16 +84,27 @@ export default function RegisterForm() {
               placeholder="Enter your password..."
             />
             {errors.password && (
-              <Message type="error" className="mt-1">
+              <Message variant="error" className="mt-1">
                 {errors.password.message}
               </Message>
             )}
           </InputContainer>
         </div>
 
-        <Button variant="primary" type="submit" className="mb-2">
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={isPending}
+          className="mb-2"
+        >
           Register
         </Button>
+
+        {error && (
+          <Message variant="error" className="mb-2">
+            {error.message}
+          </Message>
+        )}
 
         <Link to="/login" className="mb-4 text-center text-zinc-400">
           Have an account?{" "}

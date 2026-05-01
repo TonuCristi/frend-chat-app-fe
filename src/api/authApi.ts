@@ -1,19 +1,45 @@
-import type { AxiosResponse } from "axios";
+import { AxiosError, type AxiosResponse } from "axios";
 
 import { apiClient } from "../config/apiClient";
-import type { Register } from "../types/user.type";
+import type { Login, Register } from "../types/user.type";
 
 const URL = "/api/auth";
 
 export const authApi = {
-  register(newUser: Register) {
-    return apiClient
-      .post(`${URL}/auth/register`, newUser)
-      .then(({ data }: AxiosResponse<{ message: string }>) => data.message);
+  async register(newUser: Register) {
+    try {
+      const res = (await apiClient.post(
+        `${URL}/register`,
+        newUser,
+      )) as AxiosResponse<{ message: string }>;
+
+      return res.data.message;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const data = error.response?.data as { message: string };
+
+        throw new Error(data.message);
+      }
+
+      throw error;
+    }
   },
-  login() {
-    return apiClient
-      .post(`${URL}/auth/login`)
-      .then(({ data }: AxiosResponse<{ message: string }>) => data.message);
+  async login(user: Login) {
+    try {
+      const res = (await apiClient.post(
+        `${URL}/login`,
+        user,
+      )) as AxiosResponse<{ message: string }>;
+
+      return res.data.message;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const data = error.response?.data as { message: string };
+
+        throw new Error(data.message);
+      }
+
+      throw error;
+    }
   },
 };
