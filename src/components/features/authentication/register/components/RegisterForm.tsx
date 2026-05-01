@@ -17,9 +17,9 @@ import { useMutation } from "@tanstack/react-query";
 export default function RegisterForm() {
   const methods = useForm<Register>({
     defaultValues: {
-      username: "john",
-      email: "john@mail.com",
-      password: "John@2002",
+      username: "",
+      email: "",
+      password: "",
     },
     resolver: zodResolver(registerSchema),
   });

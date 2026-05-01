@@ -17,8 +17,8 @@ import { authApi } from "../../../../../api/authApi";
 export default function LoginForm() {
   const methods = useForm<Login>({
     defaultValues: {
-      email: "john@mail.com",
-      password: "John2002@",
+      email: "",
+      password: "",
     },
     resolver: zodResolver(loginSchema),
   });
