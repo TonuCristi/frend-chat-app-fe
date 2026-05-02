@@ -1,8 +1,9 @@
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
+
 import Button from "../Button";
 
-import { useMutation } from "@tanstack/react-query";
 import { authApi } from "../../../api/authApi";
-import { useNavigate } from "react-router";
 import { queryClient } from "../../../main";
 
 export default function LogoutButton() {
