@@ -1,5 +1,6 @@
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 
 import Label from "../../../../common/Label";
 import Input from "../../../../common/Input";
@@ -11,7 +12,6 @@ import { Link, useNavigate } from "react-router";
 
 import { loginSchema } from "../../../../../schemas/login.schema";
 import type { Login } from "../../../../../types/user.type";
-import { useMutation } from "@tanstack/react-query";
 import { authApi } from "../../../../../api/authApi";
 
 export default function LoginForm() {

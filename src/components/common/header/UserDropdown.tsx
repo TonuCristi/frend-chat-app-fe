@@ -6,19 +6,25 @@ import LogoutButton from "./LogoutButton";
 import { Link } from "react-router";
 
 import { useClickOutside } from "../../../hooks/useClickOutside";
+import { queryClient } from "../../../main";
+import type { UserResponse } from "../../../types/user.type";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const containerRef = useClickOutside(() => setIsOpen(false));
 
+  const user = queryClient.getQueryData<UserResponse>(["user"]);
+
   return (
     <div ref={containerRef} className="relative">
       <Button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex cursor-pointer items-center gap-4 rounded-md bg-zinc-800 px-2 py-1"
+        className="flex w-48 cursor-pointer items-center gap-4 overflow-hidden rounded-md bg-zinc-800 px-2 py-1"
       >
-        <span className="hidden sm:block">John Snow</span>
-        <span className="bg-primary h-8 w-8 rounded-full"></span>
+        <span className="hidden overflow-hidden text-nowrap text-ellipsis sm:mr-auto sm:block">
+          {user?.username}
+        </span>
+        <span className="bg-primary h-8 w-8 shrink-0 rounded-full"></span>
         <Icon
           name={isOpen ? "chevronUp" : "chevronDown"}
           className="text-primary *:stroke-3"

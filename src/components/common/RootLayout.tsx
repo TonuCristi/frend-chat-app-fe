@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 
 import Header from "./header/Header";
 import Loader from "./Loader";
 
-import { useQuery } from "@tanstack/react-query";
 import { authApi } from "../../api/authApi";
 
 export default function RootLayout() {
