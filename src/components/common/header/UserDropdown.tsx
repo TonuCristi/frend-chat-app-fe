@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Icon from "../Icon";
 import Button from "../Button";
+import LogoutButton from "./LogoutButton";
 import { Link } from "react-router";
 
 import { useClickOutside } from "../../../hooks/useClickOutside";
@@ -32,9 +33,7 @@ export default function UserDropdown() {
           >
             Profile
           </Link>
-          <Button className="active:bg-app hover:bg-app rounded-md p-2 transition-all">
-            Log out
-          </Button>
+          <LogoutButton />
         </div>
       )}
     </div>

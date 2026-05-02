@@ -29,9 +29,7 @@ export default function LoginForm() {
     mutationFn: (user: Login) => {
       return authApi.login(user);
     },
-    onSuccess: () => {
-      navigate("/");
-    },
+    onSuccess: () => navigate("/"),
   });
 
   const {

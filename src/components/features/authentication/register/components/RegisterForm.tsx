@@ -30,9 +30,7 @@ export default function RegisterForm() {
     mutationFn: (newUser: Register) => {
       return authApi.register(newUser);
     },
-    onSuccess: () => {
-      navigate("/");
-    },
+    onSuccess: () => navigate("/"),
   });
 
   const {
