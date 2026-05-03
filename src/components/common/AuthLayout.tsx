@@ -1,6 +1,29 @@
-import { Outlet } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { Navigate, Outlet } from "react-router";
+
+import Loader from "./Loader";
+
+import { authApi } from "../../api/authApi";
 
 export default function AuthLayout() {
+  const { isPending, isSuccess } = useQuery({
+    queryKey: ["user"],
+    queryFn: authApi.getLoggedUser,
+    retry: false,
+  });
+
+  if (isSuccess) {
+    return <Navigate to="/" />;
+  }
+
+  if (isPending) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center overflow-hidden">
+        <Loader variant="lg" />
+      </div>
+    );
+  }
+
   return (
     <div className="grid w-full grid-cols-1 gap-4 p-4 md:grid-cols-2">
       <div className="border-primary hidden flex-col items-center justify-center gap-2 rounded-md border-2 p-4 md:flex">

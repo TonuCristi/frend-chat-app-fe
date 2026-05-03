@@ -19,7 +19,7 @@ export default function UserDropdown() {
     <div ref={containerRef} className="relative">
       <Button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-48 cursor-pointer items-center gap-4 overflow-hidden rounded-md bg-zinc-800 px-2 py-1"
+        className="flex cursor-pointer items-center gap-4 overflow-hidden rounded-md bg-zinc-800 px-2 py-1 sm:w-48"
       >
         <span className="hidden overflow-hidden text-nowrap text-ellipsis sm:mr-auto sm:block">
           {user?.username}
