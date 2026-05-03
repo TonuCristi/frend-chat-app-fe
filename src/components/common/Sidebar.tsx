@@ -9,7 +9,7 @@ export default function Sidebar() {
 
   return (
     <FormProvider {...methods}>
-      <aside className="flex h-full flex-col gap-4">
+      <aside className="flex h-full flex-col gap-4 overflow-hidden">
         <Input
           name="search"
           variant="primary"

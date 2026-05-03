@@ -10,7 +10,10 @@ import {
   LuEye,
   LuEyeOff,
   LuHeart,
+  LuInfo,
   LuSearch,
+  LuSend,
+  LuSmile,
   LuTrash2,
   LuX,
 } from "react-icons/lu";
@@ -27,7 +30,10 @@ type IconName =
   | "heart"
   | "trash"
   | "circleMinus"
-  | "block";
+  | "block"
+  | "info"
+  | "send"
+  | "emoji";
 
 type Props = {
   name: IconName;
@@ -48,6 +54,9 @@ export default function Icon({ name, className = "" }: Props) {
     trash: <LuTrash2 />,
     circleMinus: <LuCircleMinus />,
     block: <LuCircleOff />,
+    info: <LuInfo />,
+    send: <LuSend />,
+    emoji: <LuSmile />,
   };
 
   return <span className={className}>{icon[name]}</span>;

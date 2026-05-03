@@ -14,7 +14,7 @@ export default function BurgerMenu() {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="group relative block cursor-pointer sm:hidden"
+        className="group relative block cursor-pointer md:hidden"
       >
         <Icon
           name="burgerMenu"
@@ -32,12 +32,12 @@ export default function BurgerMenu() {
 
       {isOpen && (
         <Overlay>
-          <div className="flex h-full flex-col gap-4 p-4">
+          <div className="flex h-full w-full flex-col gap-4 p-4">
             <div className="flex items-center justify-between gap-4">
               <h2 className="text-primary text-xl">Chats</h2>
               <Button
                 onClick={() => setIsOpen(false)}
-                className="group relative block cursor-pointer sm:hidden"
+                className="group relative block cursor-pointer md:hidden"
               >
                 <Icon
                   name="xmark"
