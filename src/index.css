@@ -11,3 +11,17 @@
 body {
   @apply bg-app font-mono text-zinc-50;
 }
+
+@utility scrollbar {
+  &::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply rounded-full bg-zinc-800;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+  }
+}

@@ -24,7 +24,7 @@ const inputContainer = cva([""], {
   },
 });
 
-const input = cva([""], {
+const input = cva(["outline-none"], {
   variants: {
     variant: {
       default: "",

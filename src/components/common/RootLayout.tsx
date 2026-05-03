@@ -1,5 +1,5 @@
-import { Navigate, Outlet } from "react-router";
 import { useQuery } from "@tanstack/react-query";
+import { Navigate, Outlet } from "react-router";
 
 import Header from "./header/Header";
 import Loader from "./Loader";
@@ -26,9 +26,9 @@ export default function RootLayout() {
   }
 
   return (
-    <div className="w-full">
+    <div className="flex h-dvh w-full flex-col overflow-hidden">
       <Header />
-      <main className="h-full">
+      <main className="flex h-full flex-col overflow-hidden">
         <Outlet />
       </main>
     </div>
