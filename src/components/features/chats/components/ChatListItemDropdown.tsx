@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 
 import BlockChatButton from "./BlockChatButton";
 import DeleteChatButton from "./DeleteChatButton";
@@ -14,10 +14,15 @@ export default function ChatListItemDropdown() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const containerRef = useClickOutside(() => setIsOpen(false));
 
+  function handleToggleDropdown(e: MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation();
+    setIsOpen((prev) => !prev);
+  }
+
   return (
     <div ref={containerRef} className="relative">
       <Button
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={handleToggleDropdown}
         className="group relative flex cursor-pointer items-center justify-center"
       >
         <Icon

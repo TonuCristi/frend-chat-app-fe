@@ -1,13 +1,18 @@
 import Icon from "../../common/Icon";
 import Button from "../../common/Button";
+import CloseSelectedChatButton from "./CloseSelectedChatButton";
+
+import { useSelectedChatStore } from "../../../store/useSelectedChatStore";
 
 export default function ChatHeader() {
+  const selectedChat = useSelectedChatStore((state) => state.selectedChat);
+
   return (
     <div className="border-primary flex items-center gap-4 border-b-2 pb-4">
       <div className="flex gap-2">
         <div className="bg-primary h-12 w-12 rounded-full"></div>
         <div className="flex flex-col gap-0.5">
-          <span>John Snow</span>
+          <span>{selectedChat?.user}</span>
           <span className="text-sm text-zinc-400">Last seen on 03/05/2026</span>
         </div>
       </div>
@@ -18,6 +23,7 @@ export default function ChatHeader() {
       <Button>
         <Icon name="info" className="text-primary stroke-3 text-xl" />
       </Button>
+      <CloseSelectedChatButton />
     </div>
   );
 }
