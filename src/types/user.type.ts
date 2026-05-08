@@ -7,7 +7,7 @@ export type Login = z.infer<typeof loginSchema>;
 
 export type Register = z.infer<typeof registerSchema>;
 
-export type UserResponse = {
+export type User = {
   id: string;
   username: string;
   email: string;

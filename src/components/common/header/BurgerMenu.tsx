@@ -14,7 +14,7 @@ export default function BurgerMenu() {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="group relative block cursor-pointer md:hidden"
+        className="group relative cursor-pointer"
       >
         <Icon
           name="burgerMenu"
@@ -44,7 +44,7 @@ export default function BurgerMenu() {
                   className="text-primary relative z-10 text-xl"
                 />
                 <div className="absolute top-1/2 left-1/2 flex h-10 w-10 -translate-1/2 items-center justify-center overflow-hidden rounded-full">
-                  <div className="h-0 w-0 rounded-full bg-zinc-800 transition-all group-hover:h-full group-hover:w-full group-active:h-full group-active:w-full"></div>
+                  <div className="h-0 w-0 rounded-full bg-zinc-700 transition-all group-hover:h-full group-hover:w-full group-active:h-full group-active:w-full"></div>
                 </div>
               </Button>
             </div>

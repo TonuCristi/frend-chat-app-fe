@@ -7,13 +7,13 @@ import { Link } from "react-router";
 
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { queryClient } from "../../../main";
-import type { UserResponse } from "../../../types/user.type";
+import type { User } from "../../../types/user.type";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const containerRef = useClickOutside(() => setIsOpen(false));
 
-  const user = queryClient.getQueryData<UserResponse>(["user"]);
+  const user = queryClient.getQueryData<User>(["user"]);
 
   return (
     <div ref={containerRef} className="relative">

@@ -6,6 +6,7 @@ import {
   LuChevronUp,
   LuCircleMinus,
   LuCircleOff,
+  LuCirclePlus,
   LuEllipsisVertical,
   LuEye,
   LuEyeOff,
@@ -33,7 +34,8 @@ type IconName =
   | "block"
   | "info"
   | "send"
-  | "emoji";
+  | "emoji"
+  | "plusCircle";
 
 type Props = {
   name: IconName;
@@ -57,6 +59,7 @@ export default function Icon({ name, className = "" }: Props) {
     info: <LuInfo />,
     send: <LuSend />,
     emoji: <LuSmile />,
+    plusCircle: <LuCirclePlus />,
   };
 
   return <span className={className}>{icon[name]}</span>;
