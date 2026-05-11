@@ -19,8 +19,7 @@ import { chatSchema } from "../../../schemas/chat.schema";
 import { chatsApi } from "../../../api/chatsApi";
 import { queryClient } from "../../../main";
 import type { User } from "../../../types/user.type";
-import { chatNameSchema } from "../../../schemas/chatName.schema";
-import { ZodError } from "zod";
+import toast from "react-hot-toast";
 
 const options: Option[] = [
   {
@@ -40,42 +39,42 @@ type Props = {
 export default function NewChatForm({ onCancel }: Props) {
   const methods = useForm<NewChat>({
     defaultValues: {
-      type: "direct",
+      type: ChatType.Direct,
       name: "",
+      recipientEmail: "",
     },
     resolver: zodResolver(chatSchema),
+    resetOptions: {
+      keepDirtyValues: false,
+    },
   });
 
-  const watchedType = useWatch({ control: methods.control, name: "type" });
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = methods;
+
+  const watchedType = useWatch({
+    control: control,
+    name: "type",
+  });
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: chatsApi.newChat,
+    onSuccess: (data) => {
+      toast.success(data.message);
+    },
   });
 
   const user = queryClient.getQueryData<User>(["user"]);
 
-  const {
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = methods;
-
   const onSubmit: SubmitHandler<NewChat> = (data) => {
-    if (watchedType === ChatType.Group) {
-      try {
-        chatNameSchema.parse(data.name);
-      } catch (error) {
-        if (error instanceof ZodError) {
-          setError("name", { message: error.issues[0].message });
-        }
-
-        return;
-      }
-    }
-
     mutate({
       ...data,
       name: watchedType === ChatType.Group ? data.name : null,
+      recipientEmail:
+        watchedType === ChatType.Direct ? data.recipientEmail : null,
       createdBy: watchedType === ChatType.Group && user ? user.id : null,
     });
   };
@@ -97,6 +96,23 @@ export default function NewChatForm({ onCancel }: Props) {
               </Message>
             )}
           </InputContainer>
+
+          {watchedType === ChatType.Direct && (
+            <InputContainer>
+              <Label htmlFor="recipientEmail">Recipient Email</Label>
+              <Input
+                variant="primary"
+                id="recipientEmail"
+                name="recipientEmail"
+                placeholder="Enter the recipient email..."
+              />
+              {errors.recipientEmail && (
+                <Message variant="error" className="mt-1">
+                  {errors.recipientEmail.message}
+                </Message>
+              )}
+            </InputContainer>
+          )}
 
           {watchedType === ChatType.Group && (
             <InputContainer>
@@ -123,7 +139,6 @@ export default function NewChatForm({ onCancel }: Props) {
             type="button"
             disabled={isPending}
             onClick={onCancel}
-            className="mb-2"
           >
             Cancel
           </Button>
@@ -132,14 +147,13 @@ export default function NewChatForm({ onCancel }: Props) {
             width="full"
             type="submit"
             disabled={isPending}
-            className="mb-2"
           >
             New chat!
           </Button>
         </div>
 
         {error && (
-          <Message variant="error" className="mb-2">
+          <Message variant="error" className="mt-2">
             {error.message}
           </Message>
         )}
