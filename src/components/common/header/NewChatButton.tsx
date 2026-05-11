@@ -10,7 +10,10 @@ export default function NewChatButton() {
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>
+      <Button
+        onClick={() => setIsOpen(true)}
+        className="flex items-center justify-center"
+      >
         <Icon name="plusCircle" className="text-primary text-xl" />
       </Button>
       {isOpen && (
