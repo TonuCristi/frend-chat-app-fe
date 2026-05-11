@@ -1,11 +1,16 @@
 @import "tailwindcss";
 
 @theme {
+  /* ----- Colors ------ */
   --color-primary: oklch(62.7% 0.265 303.9);
   --color-primary-hover: oklch(55.8% 0.288 302.321);
   --color-secondary: #6b7280;
   --color-secondary-hover: #4b5563;
   --color-app: oklch(21% 0.006 285.885);
+
+  /* ----- Breakpoints ------ */
+  --breakpoint-xxs: 23.4375rem;
+  --breakpoint-xs: 26.5625rem;
 }
 
 body {

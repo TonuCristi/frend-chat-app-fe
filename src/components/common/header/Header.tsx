@@ -1,4 +1,5 @@
 import BurgerMenu from "./BurgerMenu";
+import NewChatButton from "./NewChatButton";
 import UserDropdown from "./UserDropdown";
 import { Link } from "react-router";
 
@@ -12,11 +13,15 @@ export default function Header() {
         </span>
       </Link>
 
-      <BurgerMenu />
+      <div className="flex items-center md:hidden">
+        <BurgerMenu />
+      </div>
 
       <div className="ml-auto">
-        <UserDropdown />
+        <NewChatButton />
       </div>
+
+      <UserDropdown />
     </header>
   );
 }

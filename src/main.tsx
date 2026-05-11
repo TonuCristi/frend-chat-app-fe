@@ -11,6 +11,7 @@ import RootLayout from "./components/common/RootLayout.tsx";
 import AuthLayout from "./components/common/AuthLayout.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 
 export const queryClient = new QueryClient();
 
@@ -32,6 +33,22 @@ createRoot(document.getElementById("root")!).render(
           </Route>
         </Routes>
       </BrowserRouter>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        toasterId="default"
+        toastOptions={{
+          className: "",
+          duration: 3000,
+          removeDelay: 1000,
+          style: {
+            background: "oklch(21% 0.006 285.885)",
+            border: "2px solid oklch(62.7% 0.265 303.9)",
+            color: "oklch(98.5% 0 0)",
+          },
+        }}
+      />
       <ReactQueryDevtools initialIsOpen={false} buttonPosition="top-left" />
     </QueryClientProvider>
   </StrictMode>,

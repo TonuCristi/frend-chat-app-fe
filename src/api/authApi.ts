@@ -1,7 +1,7 @@
 import { AxiosError, type AxiosResponse } from "axios";
 
 import { apiClient } from "../config/apiClient";
-import type { Login, Register, UserResponse } from "../types/user.type";
+import type { Login, Register, User } from "../types/user.type";
 
 const URL = "/api/auth";
 
@@ -61,9 +61,7 @@ export const authApi = {
   },
   async getLoggedUser() {
     try {
-      const res = (await apiClient.get(
-        `${URL}/me`,
-      )) as AxiosResponse<UserResponse>;
+      const res = (await apiClient.get(`${URL}/me`)) as AxiosResponse<User>;
 
       return res.data;
     } catch (error) {
