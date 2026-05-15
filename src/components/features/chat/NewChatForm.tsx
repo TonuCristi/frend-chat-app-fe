@@ -4,6 +4,7 @@ import {
   useWatch,
   type SubmitHandler,
 } from "react-hook-form";
+import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 
@@ -17,9 +18,6 @@ import Select, { type Option } from "../../common/Select";
 import { ChatType, type NewChat } from "../../../types/chat.type";
 import { chatSchema } from "../../../schemas/chat.schema";
 import { chatsApi } from "../../../api/chatsApi";
-import { queryClient } from "../../../main";
-import type { User } from "../../../types/user.type";
-import toast from "react-hot-toast";
 
 const options: Option[] = [
   {
@@ -40,13 +38,8 @@ export default function NewChatForm({ onCancel }: Props) {
   const methods = useForm<NewChat>({
     defaultValues: {
       type: ChatType.Direct,
-      name: "",
-      recipientEmail: "",
     },
     resolver: zodResolver(chatSchema),
-    resetOptions: {
-      keepDirtyValues: false,
-    },
   });
 
   const {
@@ -56,7 +49,7 @@ export default function NewChatForm({ onCancel }: Props) {
   } = methods;
 
   const watchedType = useWatch({
-    control: control,
+    control,
     name: "type",
   });
 
@@ -67,16 +60,16 @@ export default function NewChatForm({ onCancel }: Props) {
     },
   });
 
-  const user = queryClient.getQueryData<User>(["user"]);
-
   const onSubmit: SubmitHandler<NewChat> = (data) => {
-    mutate({
-      ...data,
-      name: watchedType === ChatType.Group ? data.name : null,
-      recipientEmail:
-        watchedType === ChatType.Direct ? data.recipientEmail : null,
-      createdBy: watchedType === ChatType.Group && user ? user.id : null,
-    });
+    const { name, recipientEmail, ...rest } = data;
+
+    if (watchedType === ChatType.Direct) {
+      mutate({ recipientEmail, ...rest });
+    }
+
+    if (watchedType === ChatType.Group) {
+      mutate({ name, ...rest });
+    }
   };
 
   return (
@@ -106,7 +99,7 @@ export default function NewChatForm({ onCancel }: Props) {
                 name="recipientEmail"
                 placeholder="Enter the recipient email..."
               />
-              {errors.recipientEmail && (
+              {watchedType === ChatType.Direct && errors.recipientEmail && (
                 <Message variant="error" className="mt-1">
                   {errors.recipientEmail.message}
                 </Message>

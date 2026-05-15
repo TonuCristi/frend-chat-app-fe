@@ -11,8 +11,8 @@ export const chatSchema = z
       .max(30, {
         message: "The name should't be longer than 30 characters!",
       })
-      .nullable(),
-    recipientEmail: z.string().nullable(),
+      .optional(),
+    recipientEmail: z.string().optional(),
   })
   .refine((data) => !(data.type === ChatType.Group && !data.name), {
     error: "The name field should't be empty!",
@@ -35,3 +35,16 @@ export const chatSchema = z
       }
     }
   });
+
+// export const chatSchema = z.discriminatedUnion("type", [
+//   z.object({ type: z.literal(ChatType.Direct), recipientEmail: emailSchema }),
+//   z.object({
+//     type: z.literal(ChatType.Group),
+//     name: z
+//       .string()
+//       .min(1, { message: "This name field should't be empty!" })
+//       .max(30, {
+//         message: "The name field should't be longer than 30 characters!",
+//       }),
+//   }),
+// ]);
