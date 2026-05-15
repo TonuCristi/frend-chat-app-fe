@@ -1,23 +1,29 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import { Navigate, Outlet } from "react-router";
 
 import Header from "./header/Header";
 import Loader from "./Loader";
 
 import { authApi } from "../../api/authApi";
+import { chatsApi } from "../../api/chatsApi";
 
 export default function RootLayout() {
-  const { isPending, isError } = useQuery({
-    queryKey: ["user"],
-    queryFn: authApi.getLoggedUser,
-    retry: false,
+  const [userResult, chatsResult] = useQueries({
+    queries: [
+      { queryKey: ["user"], queryFn: authApi.getLoggedUser, retry: false },
+      {
+        queryKey: ["chats"],
+        queryFn: () => chatsApi.getChats({ page: 0, perPage: 15 }),
+        retry: false,
+      },
+    ],
   });
 
-  if (isError) {
+  if (userResult.isError || chatsResult.isError) {
     return <Navigate to="/login" />;
   }
 
-  if (isPending) {
+  if (userResult.isPending || chatsResult.isPending) {
     return (
       <div className="flex h-screen w-full items-center justify-center overflow-hidden">
         <Loader variant="lg" />
